@@ -42,7 +42,8 @@ class AngajatDB(object):
 	
 		rows = cur.fetchall()
 	
-		for row in rows:
-			print(row)
+		#for row in rows:
+		#    print(row)
+		return rows
  
  
