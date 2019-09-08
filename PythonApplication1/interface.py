@@ -8,7 +8,7 @@ class Grapic(object):
         self.__root.geometry("800x600+100+100")
         self.__menubar = Menu(self.__root)
         self.__menubar.add_command(label="Add Emploee", command=self.__add_emploee)
-        self.__menubar.add_command(label="Edit salaries", command=self.__edit_salaries)
+        self.__menubar.add_command(label="Salaries -5%", command=self.__edit_salaries)
         self.__root.config(menu=self.__menubar)
         self.__table = Frame(self.__root, height = 200, width = 200,bg = "BLUE",borderwidth=22)
         self.__table.pack(side=TOP,padx=2,pady=2,fill=BOTH)
@@ -50,7 +50,18 @@ class Grapic(object):
 
 
     def __edit_salaries(self):
-        print("Bula")
+        for row in self.__table_rows:
+            salar = round(float(row.children['!entry2'].get()), 2)
+            salar -= salar*0.05  # 5% decrease
+            salar = round(salar, 2)  # flaot with 2 decimals only
+            cnp = row.children['!label'].cget('text')
+            nume = row.children['!entry'].get()
+            self.__db.update_emploee((cnp,nume,salar))
+        # re-draw the table data
+        for table_row in self.__table_rows:
+            table_row.destroy()
+        self.__table_rows = []
+        self.fill_data(self.__db.select_all_employees())
 
 
     def fill_data(self, angajati):
