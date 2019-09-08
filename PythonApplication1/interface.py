@@ -1,4 +1,5 @@
 from tkinter import *
+from vscroll import *
 
 class Grapic(object):
     def __init__(self, title, db_connection):
@@ -15,11 +16,13 @@ class Grapic(object):
         self.__table_header = Frame(self.__table,height = 100, width = 100,bg = "GREEN",borderwidth=22)
         self.__table_header.pack(side=TOP,padx=5,pady=5,fill=BOTH)
         self.__table_rows = []
-        self.__cnp_label = Label(self.__table_header, text='CNP').pack(side=LEFT)
-        self.__nume_label = Label(self.__table_header, text='Nume').pack(side=LEFT,padx=70,pady=5)
+        self.__cnp_label = Label(self.__table_header, text='CNP').pack(side=LEFT,padx=30, pady=5)
+        self.__nume_label = Label(self.__table_header, text='Nume').pack(side=LEFT,padx=50,pady=5)
         self.__salar_label = Label(self.__table_header, text='Salariu').pack(side=LEFT,padx=30,pady=5)
         self.__edit_label = Label(self.__table_header, text='Edit').pack(side=LEFT,padx=60,pady=5)
         self.__remove_label = Label(self.__table_header, text='Remove').pack(side=LEFT,padx=0,pady=5)
+        self.__table_content = VerticalScrolledFrame(self.__table, height = 400, width = 200,bg = "BLUE",borderwidth=22)
+        self.__table_content.pack(side=BOTTOM,fill=X)
 
 
     def __add_emploee(self):
@@ -67,8 +70,8 @@ class Grapic(object):
     def fill_data(self, angajati):
         Idx = 0
         for angajat in angajati:
-            self.__table_rows.append(Frame(self.__table, height = 40, width = 40,bg = "RED",borderwidth=22))
-            self.__table_rows[Idx].pack(side=BOTTOM,fill=X)
+            self.__table_rows.append(Frame(self.__table_content, height = 40, width = 40,bg = "RED",borderwidth=22))
+            self.__table_rows[Idx].pack(side=BOTTOM,fill=X,pady=1)
             cnp = Label(self.__table_rows[Idx], text=angajat[0])
             cnp.pack(padx=10,pady=10,side=LEFT)
             nume = Entry(self.__table_rows[Idx])
@@ -86,6 +89,7 @@ class Grapic(object):
             delete_btn.configure(command=lambda button=delete_btn: self.__on_delete(button))
             delete_btn.pack(side=LEFT,padx=30,pady=5)
             Idx+=1
+
 
     def start(self):
         self.__root.mainloop()
