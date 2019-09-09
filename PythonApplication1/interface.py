@@ -54,8 +54,8 @@ class Grapic(object):
 
     def __edit_salaries(self):
         for row in self.__table_rows:
-            salar = round(float(row.children['!entry2'].get()), 2)
-            salar -= salar*0.05  # 5% decrease
+            salar = round(float(row.children['!entry2'].get()), 2)    # make float with 2 decimals
+            salar-= salar*0.05  # 5% decrease
             salar = round(salar, 2)  # flaot with 2 decimals only
             cnp = row.children['!label'].cget('text')
             nume = row.children['!entry'].get()
@@ -75,12 +75,12 @@ class Grapic(object):
             cnp = Label(self.__table_rows[Idx], text=angajat[0])
             cnp.pack(padx=10,pady=10,side=LEFT)
             nume = Entry(self.__table_rows[Idx])
-            nume.delete(0, 'end')
+            nume.delete(0, 'end')   # delete 'nume' entry text, so it will not stick when the table content is re-drawn
             nume.insert(0, angajat[1])
             nume.pack(padx=30,pady=10,side=LEFT)
             salar = Entry(self.__table_rows[Idx], textvariable=angajat[2])
             salar.pack(padx=10,pady=10,side=LEFT)
-            salar.delete(0, 'end')
+            salar.delete(0, 'end')   # delete 'salar' entry text, so it will not stick when the table content is re-drawn
             salar.insert(0, angajat[2])
             update_btn = Button(self.__table_rows[Idx], text='Update')
             update_btn.configure(command=lambda button=update_btn: self.__on_update(button))

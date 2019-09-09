@@ -5,6 +5,6 @@ a = AngajatDB("C:\Repos\FirstPython-Aplication\PythonApplication1\database\demod
 
 i = Grapic("Yay", a)
 
-i.fill_data(a.select_all_employees())
+i.fill_data(a.select_all_employees())   # method reused during delete and insert emploee
 
-i.start()
+i.start()   # infinte loop

@@ -29,7 +29,7 @@ class AngajatDB(object):
             print(row)
 
     def update_emploee(self, emploee_details):
-        cur = self.conn.cursor()
+        cur = self.conn.cursor()                                                            # nume            @ salar            #cnp
         update_str = "UPDATE Angajat SET nume = '%s', salariu = '%s' WHERE cnp = %s;" % (emploee_details[1],emploee_details[2],emploee_details[0])
         cur.execute(update_str)
         self.conn.commit()
